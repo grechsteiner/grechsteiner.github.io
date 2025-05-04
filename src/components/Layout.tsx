@@ -4,16 +4,19 @@ import Footer from './Footer';
 
 type LayoutProps = {
     children: ReactNode;
+    maxWidth?: string;
 };
 
-export default function Layout({ children}: LayoutProps) {
+export default function Layout({ children, maxWidth = "max-w-5xl" }: LayoutProps) {
+    const contentWidthClass = `${maxWidth} w-full mx-auto px-4`;
+    
     return (
-        <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-            <Header />
-            <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="flex flex-col min-h-screen bg-gray-900 text-gray-400">
+            <Header contentWidthClass={contentWidthClass} />
+            <main className={`flex-grow py-8 ${contentWidthClass}`}>
                 {children}
             </main>
-            <Footer />
+            <Footer contentWidthClass={contentWidthClass} />
         </div>
     );
 };
