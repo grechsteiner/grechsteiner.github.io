@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 html, body {
-    overscroll-behavior: none;
+    @apply bg-black;
 }

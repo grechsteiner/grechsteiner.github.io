@@ -11,9 +11,9 @@ export default function Layout({ children, maxWidth = "max-w-5xl" }: LayoutProps
     const contentWidthClass = `${maxWidth} w-full mx-auto px-4`;
     
     return (
-        <div className="flex flex-col min-h-screen bg-gray-900 text-gray-400">
+        <div className="flex flex-col min-h-screen bg-black">
             <Header contentWidthClass={contentWidthClass} />
-            <main className={`flex-grow py-8 ${contentWidthClass}`}>
+            <main className={`flex-grow ${contentWidthClass}`}>
                 {children}
             </main>
             <Footer contentWidthClass={contentWidthClass} />

@@ -19,70 +19,66 @@ export default function Header({ contentWidthClass }: HeaderProps) {
     ];
       
     return (
-        <header className="bg-gray-950 shadow-lg sticky top-0 z-50 w-full">
-            <div className="py-4">
-                <div className={contentWidthClass}>
-                    <div className="flex justify-between items-center w-full">
-                        <nav>
-                            <ul className="flex space-x-12">
-                                {navItems.map((item) => (
-                                    <li key={item.path}>
-                                        <NavLink 
-                                            to={item.path}
-                                            className={({ isActive }) => 
-                                                `transition-colors ${
-                                                    isActive
-                                                        ? "text-white"
-                                                        : "text-gray-400 hover:text-white"
-                                                }`
-                                            }
-                                        >
-                                            {item.label}
-                                        </NavLink>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
+        <header className={contentWidthClass}>
+            <div className="flex justify-between items-center w-full p-4">
+                <nav>
+                    <ul className="flex space-x-12">
+                        {navItems.map((item) => (
+                            <li key={item.path}>
+                                <NavLink 
+                                    to={item.path}
+                                    className={({ isActive }) => 
+                                        `transition-colors text-lg ${
+                                            isActive
+                                                ? "text-white"
+                                                : "text-gray-400 hover:text-white"
+                                        }`
+                                    }
+                                >
+                                    {item.label}
+                                </NavLink>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
 
-                        <div className="flex">
-                            <a
-                                href="https://github.com/grechsteiner"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group flex items-center justify-center mr-[8px]"
-                                aria-label="GitHub"
-                            >
-                                <GitHubIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-purple-600 transition-colors transform group-hover:scale-110 transition-transform" />
-                            </a>
-                            <a 
-                                href="https://linkedin.com/in/grechsteiner" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="group flex items-center justify-center mr-[12px]"
-                                aria-label="LinkedIn"
+                <div className="flex">
+                    <a
+                        href="https://github.com/grechsteiner"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center mr-[8px]"
+                        aria-label="GitHub"
+                    >
+                        <GitHubIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                        href="https://linkedin.com/in/grechsteiner" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center mr-[12px]"
+                        aria-label="LinkedIn"
 
-                            >
-                                <LinkedInIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-purple-600 transition-colors transform group-hover:scale-110 transition-transform" />
-                            </a>
-                            <a 
-                                href="mailto:grayson@fullscale.org"
-                                rel="noopener noreferrer"
-                                className="group flex items-center justify-center mr-[8px]"
-                                aria-label="Email"
-                            >
-                                <EmailIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-purple-600 transition-colors transform group-hover:scale-110 transition-transform" />
-                            </a>
-                            <a 
-                                href="https://se-webring.xyz/" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="group flex items-center justify-center"
-                                aria-label="SE Webring"
-                            >
-                                <SEWebringIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-purple-600 transition-colors transform group-hover:scale-110 transition-transform" />
-                            </a>
-                        </div>
-                    </div>
+                    >
+                        <LinkedInIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                        href="mailto:grayson@fullscale.org"
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center mr-[8px]"
+                        aria-label="Email"
+                    >
+                        <EmailIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
+                    </a>
+                    <a 
+                        href="https://se-webring.xyz/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="group flex items-center justify-center"
+                        aria-label="SE Webring"
+                    >
+                        <SEWebringIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
+                    </a>
                 </div>
             </div>
         </header>
