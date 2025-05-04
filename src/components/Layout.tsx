@@ -13,7 +13,7 @@ export default function Layout({ children, maxWidth = "max-w-5xl" }: LayoutProps
     return (
         <div className="flex flex-col min-h-screen bg-black">
             <Header contentWidthClass={contentWidthClass} />
-            <main className={`flex-grow ${contentWidthClass}`}>
+            <main className={`flex flex-col flex-grow pb-8 ${contentWidthClass}`}>
                 {children}
             </main>
             <Footer contentWidthClass={contentWidthClass} />
