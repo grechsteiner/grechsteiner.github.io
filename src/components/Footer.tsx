@@ -1,9 +1,8 @@
-
 type FooterProps = {
     contentWidthClass: string;
 };
   
-export default function Footer({ contentWidthClass }: FooterProps) {
+export default function Footer({ contentWidthClass }: FooterProps): React.JSX.Element {
     return (
         <footer className="w-full shrink-0 py-4 border-t-2 border-gray-800">
             <div className={contentWidthClass}>

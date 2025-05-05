@@ -5,7 +5,7 @@ type HomeProps = {
     
 };
   
-export default function Home({ }: HomeProps) {
+export default function Home({ }: HomeProps): React.JSX.Element {
     return (
         <Layout>
             <div className="flex-grow h-full">

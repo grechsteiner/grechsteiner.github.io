@@ -10,7 +10,7 @@ type HeaderProps = {
     contentWidthClass: string;
 };
   
-export default function Header({ contentWidthClass }: HeaderProps) {
+export default function Header({ contentWidthClass }: HeaderProps): React.JSX.Element {
     const navItems = [
         { path: '/', label: 'Home'},
         { path: '/about', label: 'About'},

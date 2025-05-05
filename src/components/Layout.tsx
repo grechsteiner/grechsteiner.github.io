@@ -8,7 +8,7 @@ type LayoutProps = {
     allowScroll?: boolean;
 };
 
-export default function Layout({ children, maxWidth = "max-w-5xl", allowScroll = false }: LayoutProps) {
+export default function Layout({ children, maxWidth = "max-w-5xl", allowScroll = false }: LayoutProps): React.JSX.Element {
     const contentWidthClass = `${maxWidth} w-full mx-auto px-4`;
     
     return (

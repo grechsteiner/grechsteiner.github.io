@@ -1,46 +1,55 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+
+enum DisplayObjectType {
+    CommandInput,
+    CommandOutput
+};
+
+type DisplayObject = {
+    displayType: DisplayObjectType;
+    content: React.JSX.Element | null;
+};
 
 type Command = {
     name: string;
     description: string;
-    execute: () => React.JSX.Element | null;
+    execute: (currentCommandText: string) => React.JSX.Element | null;
 };
 
-type TerminalProps = {
-    
-};
 
-export default function Terminal({ }: TerminalProps) {
+type TerminalProps = { };
+
+export default function Terminal({ }: TerminalProps): React.JSX.Element {
     const [input, setInput] = useState('');
-    const [output, setOutput] = useState<Array<{ isCommand: boolean; content: React.JSX.Element | null }>>([]);
+    const [savedInput, setSavedInput] = useState('');
+    const [output, setOutput] = useState<DisplayObject[]>([]);
     const [history, setHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    const [tabCompletions, setTabCompletions] = useState<string[]>([]);
-    const [showCompletions, setShowCompletions] = useState(false);
+
     const inputRef = useRef<HTMLInputElement>(null);
     const terminalRef = useRef<HTMLDivElement>(null);
 
     const commands: Command[] = [
         {
             name: 'help',
-            description: 'Display all available commands',
+            description: 'Display available commands',
             execute: () => {
                 return (
-                <div className="flex flex-col">
-                    <p className="font-bold">Available commands:</p>
-                    {commands.map((cmd) => (
-                    <p key={cmd.name}>
-                        <span className="text-green-500">{cmd.name}</span> - {cmd.description}
-                    </p>
-                    ))}
-                </div>
+                    <div className="flex flex-col">
+                        <p className="font-bold">Available commands:</p>
+                        {commands.map((cmd) => (
+                            <p key={cmd.name}>
+                                <span className="text-green-500">{cmd.name}</span> - {cmd.description}
+                            </p>
+                        ))}
+                    </div>
                 );
             },
         },
         {
             name: 'clear',
-            description: 'Clear the terminal',
+            description: 'Clear the terminal screen',
             execute: () => {
                 setOutput([]);
                 return null;
@@ -48,16 +57,17 @@ export default function Terminal({ }: TerminalProps) {
         },
         {
             name: 'history',
-            description: 'Show command history',
-            execute: () => {
+            description: 'Display command history',
+            execute: (currentCommandText) => {
+                const updatedHistory = [...history, currentCommandText];
                 return (
-                <div className="flex flex-col">
-                    {history.map((cmd, index) => (
-                    <p key={index}>
-                        {index}: {cmd}
-                    </p>
-                    ))}
-                </div>
+                    <div className="flex flex-col">
+                        {updatedHistory.map((cmd, index) => (
+                            <p key={index}>
+                                {index}: {cmd}
+                            </p>
+                        ))}
+                    </div>
                 );
             },
         },
@@ -66,18 +76,18 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Display a summary',
             execute: () => {
                 return (
-                <div className="flex flex-col">
-                    <p>This is a custom terminal built with React and TypeScript.</p>
-                    <p>It supports various commands and tab completion.</p>
-                    <p>Feel free to explore all the available commands!</p>
-                    <p>Built by [Your Name] for portfolio website.</p>
-                </div>
+                    <div className="flex flex-col">
+                        <p>This is a custom terminal built with React and TypeScript.</p>
+                        <p>It supports various commands and tab completion.</p>
+                        <p>Feel free to explore all the available commands!</p>
+                        <p>Built by [Your Name] for portfolio website.</p>
+                    </div>
                 );
             },
         },
         {
             name: 'about',
-            description: 'Navigate to the about page',
+            description: 'Navigate to the About page',
             execute: () => {
                 window.location.href = '/about';
                 return null;
@@ -85,7 +95,7 @@ export default function Terminal({ }: TerminalProps) {
         },
         {
             name: 'work',
-            description: 'Navigate to the work page',
+            description: 'Navigate to the Work page',
             execute: () => {
                 window.location.href = '/work';
                 return null;
@@ -93,41 +103,41 @@ export default function Terminal({ }: TerminalProps) {
         },
         {
             name: 'projects',
-            description: 'Navigate to the projects page',
+            description: 'Navigate to the Projects page',
             execute: () => {
                 window.location.href = '/projects';
                 return null;
             },
         },
         {
-            name: 'linkedin',
-            description: 'Open LinkedIn profile',
+            name: 'github',
+            description: 'Visit my GitHub',
             execute: () => {
-                window.open('https://linkedin.com/in/your-username', '_blank');
+                window.open('https://github.com/grechsteiner', '_blank', 'noopener,noreferrer');
                 return null;
             },
         },
         {
-            name: 'github',
-            description: 'Open GitHub profile',
+            name: 'linkedin',
+            description: 'Visit my LinkedIn profile',
             execute: () => {
-                window.open('https://github.com/your-username', '_blank');
+                window.open('https://linkedin.com/in/grechsteiner', '_blank', 'noopener,noreferrer');
                 return null;
             },
         },
         {
             name: 'email',
-            description: 'Send an email',
+            description: 'Send me an email',
             execute: () => {
-                window.open('mailto:your-email@example.com', '_blank');
+                window.open('mailto:grayson@fullscale.org', '_blank', 'noopener,noreferrer');
                 return null;
             },
         },
         {
             name: 'webring',
-            description: 'Open webring',
+            description: 'Visit the SE Webring',
             execute: () => {
-                window.open('https://your-blog-url.com', '_blank');
+                window.open('https://se-webring.xyz/', '_blank', 'noopener,noreferrer');
                 return null;
             },
         },
@@ -142,7 +152,7 @@ export default function Terminal({ }: TerminalProps) {
 
     // Focus input on terminal click
     useEffect(() => {
-        const handleTerminalClick = () => {
+        const handleTerminalClick = function(): void {
             if (inputRef.current) {
                 inputRef.current.focus();
             }
@@ -151,91 +161,125 @@ export default function Terminal({ }: TerminalProps) {
         const terminal = terminalRef.current;
         if (terminal) {
             terminal.addEventListener('click', handleTerminalClick);
-            return () => {
+            return function(): void {
                 terminal.removeEventListener('click', handleTerminalClick);
             };
         }
     }, []);
 
-    // Tab completion logic
-    const handleTabCompletion = () => {
-        const matchingCommands = commands
-            .map((cmd) => cmd.name)
-            .filter((cmd) => cmd.startsWith(input));
-
-        if (matchingCommands.length === 1) {
-            setInput(matchingCommands[0] + ' ');
-            setShowCompletions(false);
-        } else if (matchingCommands.length > 1) {
-            setTabCompletions(matchingCommands);
-            setShowCompletions(true);
-        }
-    };
-
     // Handle command execution
-    const executeCommand = (commandInput: string) => {
-        const trimmedInput = commandInput.trim();
+    const handleExecuteCommand = function(commandInput: string): void {
+        const trimmedInput: string = commandInput.trim();
         
-        // Add command to output (even if empty)
-        setOutput((prev) => [...prev, { isCommand: true, content: <span>{trimmedInput}</span> }]);
+        // Display command input
+        setOutput((prev) => [...prev, { displayType: DisplayObjectType.CommandInput, content: <span>{commandInput}</span> }]);
         
-        // If input is empty, just add a blank line and return
+        // If trimmed command is empty, display blank line and return
         if (trimmedInput === '') {
-            setOutput((prev) => [...prev, { isCommand: false, content: <div>&nbsp;</div> }]);
+            setOutput((prev) => [...prev, { displayType: DisplayObjectType.CommandOutput, content: <span>&nbsp;</span> }]);
             return;
         }
 
-        const commandName = trimmedInput.toLowerCase();
-        const command = commands.find((cmd) => cmd.name === commandName);
-
-        // Update history (only non-empty commands)
-        setHistory((prev) => [...prev, trimmedInput]);
-        setHistoryIndex(-1);
-
-        // Execute command if it exists
+        // Handle command
+        const commandName: string = trimmedInput.toLowerCase();
+        const command: Command | undefined = commands.find((cmd) => cmd.name === commandName);
         if (command) {
-            const result = command.execute();
+            // Execute the command
+            const result: React.JSX.Element | null = command.execute(commandInput);
+
+            // If command has output, display it
             if (result !== null) {
-                setOutput((prev) => [...prev, { isCommand: false, content: result }]);
+                setOutput((prev) => [...prev, { displayType: DisplayObjectType.CommandOutput, content: result }]);
             }
-            setOutput((prev) => [...prev, { isCommand: false, content: <div>&nbsp;</div> }])
+
+            // If it's not the "clear" command, display blank line after command output
+            if (commandName !== 'clear') {
+                setOutput((prev) => [...prev, { displayType: DisplayObjectType.CommandOutput, content: <span>&nbsp;</span> }]);
+            }
         } else {
+            // Display error message
             setOutput((prev) => [
                 ...prev,
-                { isCommand: false, content: <div>Command not found: {commandName}. Type 'help' for available commands.</div> },
-                { isCommand: false, content: <div>&nbsp;</div> } // Add blank line after error message
+                { displayType: DisplayObjectType.CommandOutput, content: <span>-bash: {trimmedInput}: command not found</span> },
+                { displayType: DisplayObjectType.CommandOutput, content: <span>&nbsp;</span> }
+            ]);
+        }
+
+        // Add new command to command history
+        // This is async, so do it last
+        setHistory((prev) => [...prev, commandInput]);
+        setHistoryIndex(-1);
+
+        // Reset input state
+        setInput('');
+        setSavedInput('');
+    };
+
+    // Handle tab completion logic
+    const handleTabCompletion = function(commandInput: string): void {
+        const trimmedInput: string = commandInput.trim();
+
+        const matchingCommands: string[] = commands
+            .map((cmd) => cmd.name)
+            .filter((cmd) => cmd.startsWith(trimmedInput) && trimmedInput !== '');
+
+        if (matchingCommands.length === 1) {
+            setInput(matchingCommands[0] + ' ');
+        } else if (matchingCommands.length > 1) {
+            setOutput((prev) => [
+                ...prev,
+                { displayType: DisplayObjectType.CommandInput, content: <span>{commandInput}</span> },
+                { displayType: DisplayObjectType.CommandOutput, content: <span>{matchingCommands.join(" ")}</span> },
+                { displayType: DisplayObjectType.CommandOutput, content: <span>&nbsp;</span> }
             ]);
         }
     };
 
+    // Handle up arrow key press
+    const handleUpArrowKeyPress = function(): void {
+        if (history.length === 0) {
+            return;
+        }
+
+        if (historyIndex === -1) {
+            setSavedInput(input);
+        }
+
+        const newIndex = historyIndex === -1
+            ? history.length - 1
+            : Math.max(0, historyIndex - 1);
+        setHistoryIndex(newIndex);
+        setInput(history[newIndex]);
+    }
+
+    const handleDownArrowKeyPress = function(): void {
+        if (historyIndex === -1) {
+            return;
+        }
+
+        const newIndex = historyIndex + 1;
+        if (newIndex < history.length) {
+            setHistoryIndex(newIndex);
+            setInput(history[newIndex]);
+        } else {
+            setHistoryIndex(-1);
+            setInput(savedInput);
+        }
+    }
+
     // Handle key presses
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = function(e: React.KeyboardEvent<HTMLInputElement>): void {
         if (e.key === 'Enter') {
-            executeCommand(input);
-            setInput('');
-            setShowCompletions(false);
+            handleExecuteCommand(input);
         } else if (e.key === 'Tab') {
             e.preventDefault();
-            handleTabCompletion();
+            handleTabCompletion(input);
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            if (history.length > 0 && historyIndex < history.length - 1) {
-                const newIndex = historyIndex + 1;
-                setHistoryIndex(newIndex);
-                setInput(history[history.length - 1 - newIndex]);
-            }
+            handleUpArrowKeyPress();
         } else if (e.key === 'ArrowDown') {
             e.preventDefault();
-            if (historyIndex > 0) {
-                const newIndex = historyIndex - 1;
-                setHistoryIndex(newIndex);
-                setInput(history[history.length - 1 - newIndex]);
-            } else if (historyIndex === 0) {
-                setHistoryIndex(-1);
-                setInput('');
-            }
-        } else {
-            setShowCompletions(false);
+            handleDownArrowKeyPress();
         }
     };
 
@@ -249,14 +293,16 @@ export default function Terminal({ }: TerminalProps) {
             <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
                 {output.map((line, index) => (
                     <div key={index} className="mb-1">
-                        {line.isCommand ? (
-                        <div className="flex">
-                            <span className="text-blue-400 mr-2">$</span>
-                            <span>{line.content}</span>
-                        </div>
-                        ) : (
-                        <div className="pl-4">{line.content}</div>
-                        )}
+                        {line.displayType === DisplayObjectType.CommandInput 
+                            ? (
+                                <div className="flex">
+                                    <span className="text-blue-400 mr-2">$</span>
+                                    <span>{line.content}</span>
+                                </div>
+                            ) 
+                            : (
+                                <div className="pl-4">{line.content}</div>
+                            )}
                     </div>
                 ))}
 
@@ -272,24 +318,6 @@ export default function Terminal({ }: TerminalProps) {
                         autoFocus
                     />
                 </div>
-
-                {showCompletions && tabCompletions.length > 0 && (
-                    <div className="pl-4 mt-1 flex flex-wrap gap-2">
-                        {tabCompletions.map((completion) => (
-                            <span 
-                                key={completion} 
-                                className="bg-gray-800 px-2 rounded cursor-pointer hover:bg-gray-700"
-                                onClick={() => {
-                                setInput(completion + ' ');
-                                setShowCompletions(false);
-                                if (inputRef.current) inputRef.current.focus();
-                                }}
-                            >
-                                {completion}
-                            </span>
-                        ))}
-                    </div>
-                )}
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ type WorkProps = {
     
 };
   
-export default function Work({ }: WorkProps) {
+export default function Work({ }: WorkProps): React.JSX.Element {
     return (
         <Layout>
             <div>Hi</div>
