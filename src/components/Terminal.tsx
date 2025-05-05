@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 enum DisplayObjectType {
     CommandInput,
@@ -34,6 +34,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
     const [history, setHistory] = useState<string[]>(globalHistory);
     const [historyIndex, setHistoryIndex] = useState(globalHistoryIndex);
 
+    const navigate = useNavigate();
     const inputRef = useRef<HTMLInputElement>(null);
     const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -96,7 +97,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             name: 'about',
             description: 'Navigate to the About page',
             execute: () => {
-                window.location.href = '/about';
+                navigate('/about');
                 return null;
             },
         },
@@ -104,7 +105,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             name: 'work',
             description: 'Navigate to the Work page',
             execute: () => {
-                window.location.href = '/work';
+                navigate('/work');
                 return null;
             },
         },
@@ -112,7 +113,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             name: 'projects',
             description: 'Navigate to the Projects page',
             execute: () => {
-                window.location.href = '/projects';
+                navigate('/projects');
                 return null;
             },
         },
