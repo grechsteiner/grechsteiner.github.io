@@ -8,7 +8,9 @@ type HomeProps = {
 export default function Home({ }: HomeProps) {
     return (
         <Layout>
-            <Terminal/>
+            <div className="flex-grow h-full">
+                <Terminal />
+            </div>
         </Layout>
     );
 }

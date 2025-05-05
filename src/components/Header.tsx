@@ -19,7 +19,7 @@ export default function Header({ contentWidthClass }: HeaderProps) {
     ];
       
     return (
-        <header className={contentWidthClass}>
+        <header className={`shrink-0 ${contentWidthClass}`}>
             <div className="flex justify-between items-center w-full p-4">
                 <nav>
                     <ul className="flex space-x-12">
