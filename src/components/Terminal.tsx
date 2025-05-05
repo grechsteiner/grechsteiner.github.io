@@ -344,7 +344,6 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
 
     return ( 
             <div ref={containerRef} className="flex flex-col h-full overflow-hidden bg-black text-white font-mono text-[10pt] rounded-xl border-4 border-gray-800">
-
                 <span ref={charMeasureRef} className="absolute font-mono text-[10pt]" style={{ visibility: 'hidden' }}>M</span>
 
                 <div className="flex items-center py-1 bg-gray-800">
@@ -362,35 +361,22 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
                                     </div>
                                 ) 
                                 : (
-                                    <div className="pl-4">{line.content}</div>
+                                    <div className="pl-1">{line.content}</div>
                                 )}
                         </div>
                     ))}
 
                     <div className="flex items-center">
                         <span className="mr-2">[guest@grechsteiner.com ~]$</span>
-                        <div className="flex-grow relative">
-                            <input
-                                ref={inputRef}
-                                type="text"
-                                value={input}
-                                onChange={(e) => setInput(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                className="w-full bg-transparent outline-none caret-transparent"
-                                autoFocus
-                            />
-                            <div 
-                                className="absolute top-0 left-0 pointer-events-none"
-                                style={{
-                                    position: 'absolute',
-                                    left: `${input.length * 0.6}em`,
-                                    width: '0.6em',
-                                    height: '1.2em',
-                                    backgroundColor: 'white'
-                                }}
-                            >  
-                            </div>
-                        </div>
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            className="flex-grow bg-transparent outline-none caret-white"
+                            autoFocus
+                        />
                     </div>
                 </div>
             </div>
