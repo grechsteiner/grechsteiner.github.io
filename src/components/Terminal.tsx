@@ -175,17 +175,22 @@ export default function Terminal({ }: TerminalProps) {
     // Handle command execution
     const executeCommand = (commandInput: string) => {
         const trimmedInput = commandInput.trim();
-        if (trimmedInput === '') return;
+        
+        // Add command to output (even if empty)
+        setOutput((prev) => [...prev, { isCommand: true, content: <span>{trimmedInput}</span> }]);
+        
+        // If input is empty, just add a blank line and return
+        if (trimmedInput === '') {
+            setOutput((prev) => [...prev, { isCommand: false, content: <div>&nbsp;</div> }]);
+            return;
+        }
 
         const commandName = trimmedInput.toLowerCase();
         const command = commands.find((cmd) => cmd.name === commandName);
 
-        // Update history
+        // Update history (only non-empty commands)
         setHistory((prev) => [...prev, trimmedInput]);
         setHistoryIndex(-1);
-
-        // Add command to output
-        setOutput((prev) => [...prev, { isCommand: true, content: <span>{trimmedInput}</span> }]);
 
         // Execute command if it exists
         if (command) {
@@ -193,10 +198,12 @@ export default function Terminal({ }: TerminalProps) {
             if (result !== null) {
                 setOutput((prev) => [...prev, { isCommand: false, content: result }]);
             }
+            setOutput((prev) => [...prev, { isCommand: false, content: <div>&nbsp;</div> }])
         } else {
             setOutput((prev) => [
                 ...prev,
                 { isCommand: false, content: <div>Command not found: {commandName}. Type 'help' for available commands.</div> },
+                { isCommand: false, content: <div>&nbsp;</div> } // Add blank line after error message
             ]);
         }
     };
