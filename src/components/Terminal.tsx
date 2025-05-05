@@ -17,15 +17,22 @@ type Command = {
     execute: (currentCommandText: string) => React.JSX.Element | null;
 };
 
+// Global state kept outside the component to persist between re-renders and navigation
+let globalInput = '';
+let globalSavedInput = '';
+let globalOutput: DisplayObject[] = [];
+let globalHistory: string[] = [];
+let globalHistoryIndex = -1;
+
 
 type TerminalProps = { };
 
 export default function Terminal({ }: TerminalProps): React.JSX.Element {
-    const [input, setInput] = useState('');
-    const [savedInput, setSavedInput] = useState('');
-    const [output, setOutput] = useState<DisplayObject[]>([]);
-    const [history, setHistory] = useState<string[]>([]);
-    const [historyIndex, setHistoryIndex] = useState(-1);
+    const [input, setInput] = useState(globalInput);
+    const [savedInput, setSavedInput] = useState(globalSavedInput);
+    const [output, setOutput] = useState<DisplayObject[]>(globalOutput);
+    const [history, setHistory] = useState<string[]>(globalHistory);
+    const [historyIndex, setHistoryIndex] = useState(globalHistoryIndex);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const terminalRef = useRef<HTMLDivElement>(null);
@@ -59,7 +66,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             name: 'history',
             description: 'Display command history',
             execute: (currentCommandText) => {
-                const updatedHistory = [...history, currentCommandText];
+                const updatedHistory: string[] = [...history, currentCommandText];
                 return (
                     <div className="flex flex-col">
                         {updatedHistory.map((cmd, index) => (
@@ -142,6 +149,13 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             },
         },
     ];
+
+    // Update global state
+    useEffect(() => { globalInput = input; }, [input]);
+    useEffect(() => { globalSavedInput = savedInput; }, [savedInput]);
+    useEffect(() => { globalOutput = output; }, [output]);
+    useEffect(() => { globalHistory = history; }, [history]);
+    useEffect(() => { globalHistoryIndex = historyIndex; }, [historyIndex]);
 
     // Auto-scroll terminal to bottom when content changes
     useEffect(() => {
@@ -245,7 +259,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             setSavedInput(input);
         }
 
-        const newIndex = historyIndex === -1
+        const newIndex: number = historyIndex === -1
             ? history.length - 1
             : Math.max(0, historyIndex - 1);
         setHistoryIndex(newIndex);
@@ -257,7 +271,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             return;
         }
 
-        const newIndex = historyIndex + 1;
+        const newIndex: number = historyIndex + 1;
         if (newIndex < history.length) {
             setHistoryIndex(newIndex);
             setInput(history[newIndex]);
