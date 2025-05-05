@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
 
-type CommandType = {
-  name: string;
-  description: string;
-  execute: (args: string[]) => string | React.JSX.Element;
+type Command = {
+    name: string;
+    description: string;
+    execute: () => React.JSX.Element | null;
 };
 
 type TerminalProps = {
@@ -13,9 +13,7 @@ type TerminalProps = {
 
 export default function Terminal({ }: TerminalProps) {
     const [input, setInput] = useState('');
-    const [output, setOutput] = useState<Array<{ isCommand: boolean; content: string | React.JSX.Element }>>([
-        { isCommand: false, content: 'Welcome to my terminal! Type "help" to see available commands.' },
-    ]);
+    const [output, setOutput] = useState<Array<{ isCommand: boolean; content: React.JSX.Element | null }>>([]);
     const [history, setHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
     const [tabCompletions, setTabCompletions] = useState<string[]>([]);
@@ -23,7 +21,7 @@ export default function Terminal({ }: TerminalProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const terminalRef = useRef<HTMLDivElement>(null);
 
-    const commands: CommandType[] = [
+    const commands: Command[] = [
         {
             name: 'help',
             description: 'Display all available commands',
@@ -45,13 +43,8 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Clear the terminal',
             execute: () => {
                 setOutput([]);
-                return '';
+                return null;
             },
-        },
-        {
-            name: 'echo',
-            description: 'Echo the provided text',
-            execute: (args) => args.join(' '),
         },
         {
             name: 'history',
@@ -87,7 +80,7 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Navigate to the about page',
             execute: () => {
                 window.location.href = '/about';
-                return 'Navigating to about page...';
+                return null;
             },
         },
         {
@@ -95,7 +88,7 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Navigate to the work page',
             execute: () => {
                 window.location.href = '/work';
-                return 'Navigating to work page...';
+                return null;
             },
         },
         {
@@ -103,7 +96,7 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Navigate to the projects page',
             execute: () => {
                 window.location.href = '/projects';
-                return 'Navigating to projects page...';
+                return null;
             },
         },
         {
@@ -111,7 +104,7 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Open LinkedIn profile',
             execute: () => {
                 window.open('https://linkedin.com/in/your-username', '_blank');
-                return 'Opening LinkedIn profile...';
+                return null;
             },
         },
         {
@@ -119,15 +112,7 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Open GitHub profile',
             execute: () => {
                 window.open('https://github.com/your-username', '_blank');
-                return 'Opening GitHub profile...';
-            },
-        },
-        {
-            name: 'resume',
-            description: 'View resume',
-            execute: () => {
-                window.open('/resume.pdf', '_blank');
-                return 'Opening resume...';
+                return null;
             },
         },
         {
@@ -135,15 +120,15 @@ export default function Terminal({ }: TerminalProps) {
             description: 'Send an email',
             execute: () => {
                 window.open('mailto:your-email@example.com', '_blank');
-                return 'Opening email client...';
+                return null;
             },
         },
         {
-            name: 'blog',
-            description: 'Visit my blog',
+            name: 'webring',
+            description: 'Open webring',
             execute: () => {
                 window.open('https://your-blog-url.com', '_blank');
-                return 'Opening blog...';
+                return null;
             },
         },
     ];
@@ -151,39 +136,39 @@ export default function Terminal({ }: TerminalProps) {
     // Auto-scroll terminal to bottom when content changes
     useEffect(() => {
         if (terminalRef.current) {
-        terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+            terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
         }
     }, [output]);
 
     // Focus input on terminal click
     useEffect(() => {
         const handleTerminalClick = () => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
         };
 
         const terminal = terminalRef.current;
         if (terminal) {
-        terminal.addEventListener('click', handleTerminalClick);
-        return () => {
-            terminal.removeEventListener('click', handleTerminalClick);
-        };
+            terminal.addEventListener('click', handleTerminalClick);
+            return () => {
+                terminal.removeEventListener('click', handleTerminalClick);
+            };
         }
     }, []);
 
     // Tab completion logic
     const handleTabCompletion = () => {
         const matchingCommands = commands
-        .map((cmd) => cmd.name)
-        .filter((cmd) => cmd.startsWith(input));
+            .map((cmd) => cmd.name)
+            .filter((cmd) => cmd.startsWith(input));
 
         if (matchingCommands.length === 1) {
-        setInput(matchingCommands[0] + ' ');
-        setShowCompletions(false);
+            setInput(matchingCommands[0] + ' ');
+            setShowCompletions(false);
         } else if (matchingCommands.length > 1) {
-        setTabCompletions(matchingCommands);
-        setShowCompletions(true);
+            setTabCompletions(matchingCommands);
+            setShowCompletions(true);
         }
     };
 
@@ -192,8 +177,7 @@ export default function Terminal({ }: TerminalProps) {
         const trimmedInput = commandInput.trim();
         if (trimmedInput === '') return;
 
-        const args = trimmedInput.split(' ');
-        const commandName = args[0].toLowerCase();
+        const commandName = trimmedInput.toLowerCase();
         const command = commands.find((cmd) => cmd.name === commandName);
 
         // Update history
@@ -201,50 +185,50 @@ export default function Terminal({ }: TerminalProps) {
         setHistoryIndex(-1);
 
         // Add command to output
-        setOutput((prev) => [...prev, { isCommand: true, content: trimmedInput }]);
+        setOutput((prev) => [...prev, { isCommand: true, content: <span>{trimmedInput}</span> }]);
 
         // Execute command if it exists
         if (command) {
-        const result = command.execute(args.slice(1));
-        if (result !== '') {
-            setOutput((prev) => [...prev, { isCommand: false, content: result }]);
-        }
+            const result = command.execute();
+            if (result !== null) {
+                setOutput((prev) => [...prev, { isCommand: false, content: result }]);
+            }
         } else {
-        setOutput((prev) => [
-            ...prev,
-            { isCommand: false, content: `Command not found: ${commandName}. Type 'help' for available commands.` },
-        ]);
+            setOutput((prev) => [
+                ...prev,
+                { isCommand: false, content: <div>Command not found: {commandName}. Type 'help' for available commands.</div> },
+            ]);
         }
     };
 
     // Handle key presses
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-        executeCommand(input);
-        setInput('');
-        setShowCompletions(false);
-        } else if (e.key === 'Tab') {
-        e.preventDefault();
-        handleTabCompletion();
-        } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (history.length > 0 && historyIndex < history.length - 1) {
-            const newIndex = historyIndex + 1;
-            setHistoryIndex(newIndex);
-            setInput(history[history.length - 1 - newIndex]);
-        }
-        } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-            const newIndex = historyIndex - 1;
-            setHistoryIndex(newIndex);
-            setInput(history[history.length - 1 - newIndex]);
-        } else if (historyIndex === 0) {
-            setHistoryIndex(-1);
+            executeCommand(input);
             setInput('');
-        }
+            setShowCompletions(false);
+        } else if (e.key === 'Tab') {
+            e.preventDefault();
+            handleTabCompletion();
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (history.length > 0 && historyIndex < history.length - 1) {
+                const newIndex = historyIndex + 1;
+                setHistoryIndex(newIndex);
+                setInput(history[history.length - 1 - newIndex]);
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                const newIndex = historyIndex - 1;
+                setHistoryIndex(newIndex);
+                setInput(history[history.length - 1 - newIndex]);
+            } else if (historyIndex === 0) {
+                setHistoryIndex(-1);
+                setInput('');
+            }
         } else {
-        setShowCompletions(false);
+            setShowCompletions(false);
         }
     };
 
