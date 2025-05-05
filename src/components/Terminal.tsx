@@ -47,7 +47,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
                         <p className="font-bold">Available commands:</p>
                         {commands.map((cmd) => (
                             <p key={cmd.name}>
-                                <span className="text-green-500">{cmd.name}</span> - {cmd.description}
+                                <span className="text-white">{cmd.name}</span> - {cmd.description}
                             </p>
                         ))}
                     </div>
@@ -297,42 +297,102 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
         }
     };
 
-    return (
-        <div className="flex flex-col h-full overflow-hidden bg-gray-900 text-green-400 font-mono rounded-md border border-gray-700 shadow-lg">
+    /* Terminal dimension measurement */
+    const containerRef = useRef<HTMLDivElement>(null);
+    const charMeasureRef = useRef<HTMLSpanElement>(null);
+    const [size, setSize] = useState({ charWidth: 0, charHeight: 0 });
 
-            <div className="flex items-center px-2 py-1 bg-gray-800 border-b border-gray-700">
-                <div className="flex-grow text-center text-xs text-gray-400">Terminal</div>
-            </div>
+    const calculateCharDimensions = function(): { width: number; height: number } {
+        if (charMeasureRef.current) {
+            const charRect = charMeasureRef.current.getBoundingClientRect();
+            return {
+                width: charRect.width,
+                height: charRect.height
+            };
+        }
+        return { width: 6, height: 14 };
+    };
+    
+    const updateSize = function(): void {
+        if (containerRef.current) {
+            const { width, height } = containerRef.current.getBoundingClientRect();
+            const charDimensions = calculateCharDimensions();
+            
+            const contentWidth = width - 12;
+            const contentHeight = height - 12;
+            
+            setSize({
+                charWidth: Math.floor(contentWidth / charDimensions.width),
+                charHeight: Math.floor(contentHeight / charDimensions.height)
+            });
+        }
+    };
 
-            <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
-                {output.map((line, index) => (
-                    <div key={index} className="mb-1">
-                        {line.displayType === DisplayObjectType.CommandInput 
-                            ? (
-                                <div className="flex">
-                                    <span className="text-blue-400 mr-2">$</span>
-                                    <span>{line.content}</span>
-                                </div>
-                            ) 
-                            : (
-                                <div className="pl-4">{line.content}</div>
-                            )}
+    useEffect(() => {
+        updateSize();
+        const resizeObserver = new ResizeObserver(updateSize);
+        if (containerRef.current) {
+            resizeObserver.observe(containerRef.current);
+        }
+        
+        window.addEventListener('resize', updateSize);
+        return function(): void {
+            resizeObserver.disconnect();
+            window.removeEventListener('resize', updateSize);
+        };
+    }, []);
+
+    return ( 
+            <div ref={containerRef} className="flex flex-col h-full overflow-hidden bg-black text-white font-mono text-[10pt] rounded-xl border-4 border-gray-800">
+
+                <span ref={charMeasureRef} className="absolute font-mono text-[10pt]" style={{ visibility: 'hidden' }}>M</span>
+
+                <div className="flex items-center py-1 bg-gray-800">
+                    <div className="flex-grow text-center text-gray-300">guest@grechsteiner.com ━━ ━bash ━━ {size.charWidth}x{size.charHeight}</div>
+                </div>
+
+                <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
+                    {output.map((line, index) => (
+                        <div key={index} className="mb-1">
+                            {line.displayType === DisplayObjectType.CommandInput 
+                                ? (
+                                    <div className="flex">
+                                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                                        <span>{line.content}</span>
+                                    </div>
+                                ) 
+                                : (
+                                    <div className="pl-4">{line.content}</div>
+                                )}
+                        </div>
+                    ))}
+
+                    <div className="flex items-center">
+                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                        <div className="flex-grow relative">
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                                className="w-full bg-transparent outline-none caret-transparent"
+                                autoFocus
+                            />
+                            <div 
+                                className="absolute top-0 left-0 pointer-events-none"
+                                style={{
+                                    position: 'absolute',
+                                    left: `${input.length * 0.6}em`,
+                                    width: '0.6em',
+                                    height: '1.2em',
+                                    backgroundColor: 'white'
+                                }}
+                            >  
+                            </div>
+                        </div>
                     </div>
-                ))}
-
-                <div className="flex items-center">
-                    <span className="text-blue-400 mr-2">$</span>
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        className="flex-grow bg-transparent outline-none caret-green-400"
-                        autoFocus
-                    />
                 </div>
             </div>
-        </div>
     );
 }
