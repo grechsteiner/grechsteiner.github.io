@@ -7,7 +7,7 @@ type AboutProps = {
   
 export default function About({ }: AboutProps): React.JSX.Element {
     return (
-        <Layout>
+        <Layout allowScroll={true}>
             <IconGrid />
         </Layout>
     );

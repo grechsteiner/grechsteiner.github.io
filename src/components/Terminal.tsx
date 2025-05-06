@@ -344,40 +344,42 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
     }, []);
 
     return ( 
-        <div ref={containerRef} className="flex flex-col h-full overflow-hidden bg-black text-white font-mono text-[10pt] rounded-xl border-4 border-gray-800">
-            <span ref={charMeasureRef} className="absolute font-mono text-[10pt]" style={{ visibility: 'hidden' }}>M</span>
+        <div className="flex-grow h-full">
+            <div ref={containerRef} className="flex flex-col h-full overflow-hidden bg-black text-white font-mono text-[10pt] rounded-xl border-4 border-gray-800">
+                <span ref={charMeasureRef} className="absolute font-mono text-[10pt]" style={{ visibility: 'hidden' }}>M</span>
 
-            <div className="flex items-center py-1 bg-gray-800">
-                <div className="flex-grow text-center text-gray-300">guest@grechsteiner.com ━━ ━bash ━━ {size.charWidth}x{size.charHeight}</div>
-            </div>
+                <div className="flex items-center py-1 bg-gray-800">
+                    <div className="flex-grow text-center text-gray-300">guest@grechsteiner.com ━━ ━bash ━━ {size.charWidth}x{size.charHeight}</div>
+                </div>
 
-            <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
-                {output.map((line, index) => (
-                    <div key={index} className="mb-1">
-                        {line.displayType === DisplayObjectType.CommandInput 
-                            ? (
-                                <div className="flex">
-                                    <span className="mr-2">[guest@grechsteiner.com ~]$</span>
-                                    <span>{line.content}</span>
-                                </div>
-                            ) 
-                            : (
-                                <div className="pl-1">{line.content}</div>
-                            )}
+                <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
+                    {output.map((line, index) => (
+                        <div key={index} className="mb-1">
+                            {line.displayType === DisplayObjectType.CommandInput 
+                                ? (
+                                    <div className="flex">
+                                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                                        <span>{line.content}</span>
+                                    </div>
+                                ) 
+                                : (
+                                    <div className="pl-1">{line.content}</div>
+                                )}
+                        </div>
+                    ))}
+
+                    <div className="flex items-center">
+                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            className="flex-grow bg-transparent outline-none caret-white"
+                            autoFocus
+                        />
                     </div>
-                ))}
-
-                <div className="flex items-center">
-                    <span className="mr-2">[guest@grechsteiner.com ~]$</span>
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        onKeyDown={handleKeyDown}
-                        className="flex-grow bg-transparent outline-none caret-white"
-                        autoFocus
-                    />
                 </div>
             </div>
         </div>
