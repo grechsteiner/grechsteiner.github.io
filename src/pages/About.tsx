@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import IconGrid from "../components/IconGrid";
 
 type AboutProps = {
 
@@ -7,7 +8,7 @@ type AboutProps = {
 export default function About({ }: AboutProps): React.JSX.Element {
     return (
         <Layout>
-            <div>Hi</div>
+            <IconGrid />
         </Layout>
     );
 }

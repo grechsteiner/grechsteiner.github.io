@@ -1,0 +1,10 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hexagonal background -->
+  <polygon points="195,100 147.5,182.29 52.5,182.29 5,100 52.5,17.71 147.5,17.71"
+           fill="currentColor" />
+  <!-- Valgrind text -->
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-size="40" fill="black" font-family="serif">
+    Valgrind
+  </text>
+</svg>
