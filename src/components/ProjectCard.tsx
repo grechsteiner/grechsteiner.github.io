@@ -10,8 +10,12 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ title, description, image, githubURL, technologies }: ProjectCardProps): React.JSX.Element {
     return (
-        <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-800 p-4">
-            <div className="h-64 rounded-lg overflow-hidden relative mb-4">
+        <div 
+            className={`rounded-lg overflow-hidden shadow-lg bg-gray-800 p-4 
+                       transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] 
+                       h-full flex flex-col`}
+        >
+            <div className="rounded-lg overflow-hidden relative mb-4 flex-shrink-0" style={{ minHeight: "12rem" }}>
                 <img 
                     className="w-full h-full object-cover" 
                     src={image} 
@@ -30,14 +34,14 @@ export default function ProjectCard({ title, description, image, githubURL, tech
                 </a>
             </div>
           
-            <div>
+            <div className="flex-grow flex flex-col">
                 <h3 className="font-bold text-white text-xl mb-2">{title}</h3>
                 
-                <p className="text-gray-300 text-sm mb-4">
+                <p className="text-gray-300 text-sm mb-4 flex-grow">
                     {description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-auto">
                     {technologies.map((tech, index) => (
                         <span key={index} className="text-xs px-2 py-1 rounded text-white bg-sky-400">
                             {tech}
