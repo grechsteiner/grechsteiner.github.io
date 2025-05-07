@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import TimeLine from "../components/TimeLine";
 
 type WorkProps = {
     
@@ -7,7 +8,7 @@ type WorkProps = {
 export default function Work({ }: WorkProps): React.JSX.Element {
     return (
         <Layout>
-            <div>Hi</div>
+            <TimeLine />
         </Layout>
     );
 }
