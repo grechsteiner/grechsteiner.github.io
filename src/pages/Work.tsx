@@ -7,7 +7,7 @@ type WorkProps = {
   
 export default function Work({ }: WorkProps): React.JSX.Element {
     return (
-        <Layout>
+        <Layout allowScroll={true}>
             <TimeLine />
         </Layout>
     );
