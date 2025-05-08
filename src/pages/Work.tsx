@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import TimeLine from "../components/TimeLine";
+import WorkExperience from "../components/WorkExperience";
 
 type WorkProps = {
     
@@ -8,7 +8,7 @@ type WorkProps = {
 export default function Work({ }: WorkProps): React.JSX.Element {
     return (
         <Layout allowScroll={true}>
-            <TimeLine />
+            <WorkExperience />
         </Layout>
     );
 }
