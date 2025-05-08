@@ -51,8 +51,8 @@ export default function IconGrid({ }: IconGridProps): React.JSX.Element {
     
     return (
         <div className="px-0 w-full">
-            <div className="mb-12">
-                <h3 className="text-white mb-4 text-2xl font-medium">Languages</h3>
+            <div className="mb-8">
+                <h3 className="text-white mb-4 text-xl font-medium">Languages</h3>
 
                 <div className="grid grid-cols-3 gap-8 md:grid-cols-6 lg:grid-cols-12">
                     {languages.map((item) => (
@@ -77,8 +77,8 @@ export default function IconGrid({ }: IconGridProps): React.JSX.Element {
                 </div>
             </div>
             
-            <div className="mb-12">
-                <h3 className="text-white mb-4 text-2xl font-medium">Technologies & Frameworks</h3>
+            <div>
+                <h3 className="text-white mb-4 text-xl font-medium">Technologies & Frameworks</h3>
 
                 <div className="grid grid-cols-3 gap-8 md:grid-cols-6 lg:grid-cols-12">
                     {technologies.map((item) => (

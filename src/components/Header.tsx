@@ -28,7 +28,7 @@ export default function Header({ contentWidthClass }: HeaderProps): React.JSX.El
                                 <NavLink 
                                     to={item.path}
                                     className={({ isActive }) => 
-                                        `transition-colors text-lg ${
+                                        `transition-colors text-xl ${
                                             isActive
                                                 ? "text-white"
                                                 : "text-gray-400 hover:text-white"
