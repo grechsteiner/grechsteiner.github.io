@@ -19,7 +19,7 @@ export default function About({ }: AboutProps): React.JSX.Element {
                     </p>
 
                     <p>
-                    In my free time you’ll find me playing (and watching) hockey & baseball, and reading up on interesting technologies both past and present. At the moment I’m reading “…”
+                        In my free time you’ll find me playing (and watching) hockey & baseball, and reading up on interesting technologies both past and present. At the moment I’m reading “…”
                     </p>
                 </div>                
 
