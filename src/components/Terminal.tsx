@@ -24,6 +24,8 @@ let globalOutput: DisplayObject[] = [];
 let globalHistory: string[] = [];
 let globalHistoryIndex = -1;
 
+let hasGreetingBeenDisplayed = false;
+
 
 type TerminalProps = { };
 
@@ -45,22 +47,49 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             execute: () => {
                 return (
                     <div className="flex flex-col">
-                        <p className="font-bold">Available commands:</p>
-                        {commands.map((cmd) => (
-                            <p key={cmd.name}>
-                                <span className="text-white">{cmd.name}</span> - {cmd.description}
-                            </p>
-                        ))}
+                        <p className="font-bold">Available Commands:</p>
+                        <div className="grid grid-cols-[auto_1fr] gap-x-8">
+                            {commands.map((cmd) => (
+                                <>
+                                    <span key={`name-${cmd.name}`} >
+                                        {cmd.name}
+                                    </span>
+                                    <span key={`desc-${cmd.name}`} className="text-gray-400">
+                                        {cmd.description}
+                                    </span>
+                                </>
+                            ))}
+                        </div>
                     </div>
                 );
             },
         },
         {
-            name: 'clear',
-            description: 'Clear the terminal screen',
+            name: 'greeting',
+            description: 'Display the greeting banner',
             execute: () => {
-                setOutput([]);
-                return null;
+                const banner = [
+                    "   ______                                     ____            __         __       _                ",
+                    "  / ____/________  __  ___________  ____     / __ \\___  _____/ /_  _____/ /____  (_)___  ___  _____",
+                    " / / __/ ___/ __ `/ / / / ___/ __ \\/ __ \\   / /_/ / _ \\/ ___/ __ \\/ ___/ __/ _ \\/ / __ \\/ _ \\/ ___/",
+                    "/ /_/ / /  / /_/ / /_/ (__  ) /_/ / / / /  / _, _/  __/ /__/ / / (__  ) /_/  __/ / / / /  __/ /    ",
+                    "\\____/_/   \\__,_/\\__, /____/\\____/_/ /_/  /_/ |_|\\___/\\___/_/ /_/____/\\__/\\___/_/_/ /_/\\___/_/     ",
+                    "                /____/                                                                             "
+                ];
+
+                return (
+                    <div className="flex flex-col text-white whitespace-pre">
+                        {banner.map((line, index) => (
+                            <p key={index}>
+                                {line}
+                            </p>
+                        ))}
+                        <p>&nbsp;</p>
+                        <p>
+                            Type 'help' to see a list of available commands
+                        </p>
+                    </div>
+                );
             },
         },
         {
@@ -80,17 +109,11 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             },
         },
         {
-            name: 'summary',
-            description: 'Display a summary',
+            name: 'clear',
+            description: 'Clear the terminal',
             execute: () => {
-                return (
-                    <div className="flex flex-col">
-                        <p>This is a custom terminal built with React and TypeScript.</p>
-                        <p>It supports various commands and tab completion.</p>
-                        <p>Feel free to explore all the available commands!</p>
-                        <p>Built by [Your Name] for portfolio website.</p>
-                    </div>
-                );
+                setOutput([]);
+                return null;
             },
         },
         {
@@ -157,6 +180,14 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
     useEffect(() => { globalOutput = output; }, [output]);
     useEffect(() => { globalHistory = history; }, [history]);
     useEffect(() => { globalHistoryIndex = historyIndex; }, [historyIndex]);
+
+    useEffect(() => {
+        if (!hasGreetingBeenDisplayed) {
+            const initialCommand = commands[1];
+            handleExecuteCommand(initialCommand.name);
+            hasGreetingBeenDisplayed = true;
+        }
+    }, []);
 
     // Auto-scroll terminal to bottom when content changes
     useEffect(() => {
