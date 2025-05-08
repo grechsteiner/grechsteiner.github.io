@@ -42,7 +42,7 @@ export default function ProjectCard({ title, description, image, githubURL, tech
                 
                 <div className="flex flex-wrap gap-2 mt-auto">
                     {technologies.map((technology, index) => (
-                        <span key={index} className="text-sm px-2 py-1 rounded-md text-white bg-indigo-800">
+                        <span key={index} className="text-sm text-white px-3 py-1 rounded-md bg-blue-700">
                             {technology}
                         </span>
                     ))}
