@@ -61,12 +61,12 @@ export function WorkExperience( { internships }: WorkExperienceProps): React.JSX
                         
                         <div>
                             <div className="flex flex-wrap gap-2">
-                                {selectedInternship.technologies.map((tech, index) => (
+                                {selectedInternship.technologies.map((technology, index) => (
                                     <span 
                                         key={index} 
                                         className="text-sm text-white px-3 py-1 rounded-lg bg-blue-700"
                                     >
-                                        {tech}
+                                        {technology}
                                     </span>
                                 ))}
                             </div>
