@@ -17,20 +17,11 @@ export default function About({ }: AboutProps): React.JSX.Element {
                     </p>
 
                     <p className="mb-4">
-                        My name is Grayson, and I’m a 3rd year Software Engineering student at the University of Waterloo.
+                        I'm Grayson, a 4th year Software Engineering student at the University of Waterloo
                     </p>
 
                     <p>
-                        In my free time you’ll find me playing (and watching) hockey & baseball, and reading up on interesting technologies both past and present. At the moment I’m reading “…”
-                    </p>
-                </div>   
-
-                <div className="text-gray-400 mt-4 text-md">
-
-                    <h3 className="text-white mb-4 text-xl font-medium">Hobbies</h3>
-
-                    <p className="mb-4">
-                        Some random text
+                        Currently interning at Tenstorrent on the kernel acceleration team, writing collective communication neural network operations for Tenstorrent AI accelerators
                     </p>
                 </div>                
 

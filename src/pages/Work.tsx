@@ -9,39 +9,63 @@ import OurGroceriesLogo from "../assets/images/ourgroceriesLogo.jpeg";
 const internships: Internship[] = [
     {
         id: 1,
-        title: "Software Engineering Intern",
+        title: "Software Engineer Intern",
         company: "Tenstorrent",
-        date: "May 2025 - Present",
+        date: "Jan 2026 - Present",
         image: TenstorrentLogo,
-        description: "Led development of a web application for healthcare providers, focusing on improving patient care workflows and data visualization. Implemented real-time analytics dashboard that reduced decision-making time by 30%.",
-        technologies: ["C++"]
+        description: "Writing collective communication neural network operations for Tenstorrent AI accelerators as a member of the kernel acceleration team, check out my work ",
+        urlText: "here",
+        url: "https://github.com/tenstorrent/tt-metal/pulls?q=is%3Apr+author%3AgrechsteinerTT+is%3Aclosed",
+        technologies: ["C", "C++", "Python", "Pytest"]
     },
     {
         id: 2,
+        title: "Software Engineer Intern (part-time during school)",
+        company: "Tenstorrent",
+        date: "Sept 2025 - Dec 2025",
+        image: TenstorrentLogo,
+        description: "Writing collective communication neural network operations for Tenstorrent AI accelerators as a member of the kernel acceleration team, check out my work ",
+        urlText: "here",
+        url: "https://github.com/tenstorrent/tt-metal/pulls?q=is%3Apr+author%3AgrechsteinerTT+is%3Aclosed",
+        technologies: ["C", "C++", "Python", "Pytest"]
+    },
+    {
+        id: 3,
+        title: "Software Engineer Intern",
+        company: "Tenstorrent",
+        date: "May 2025 - Aug 2025",
+        image: TenstorrentLogo,
+        description: "Writing collective communication neural network operations for Tenstorrent AI accelerators as a member of the kernel acceleration team, check out my work ",
+        urlText: "here",
+        url: "https://github.com/tenstorrent/tt-metal/pulls?q=is%3Apr+author%3AgrechsteinerTT+is%3Aclosed",
+        technologies: ["C", "C++", "Python", "Pytest"]
+    },
+    {
+        id: 4,
         title: "iOS Engineer Intern",
         company: "Faire",
         date: "Sept 2024 - Dec 2024",
         image: FaireLogo,
-        description: "Developed responsive user interfaces for fintech applications with focus on accessibility and performance. Reduced load times by 45% through code optimization and implementation of lazy loading strategies.",
-        technologies: ["Swift", "SwiftUI", "SwiftyMocky", "Swinject", "Protobuf", "Jenkins"]
+        description: "Shipped 6 iOS features as a member of the growth team; collaborated with backend devs to specify behaviour, design protobufs & endpoints, and identify potential security threats",
+        technologies: ["Swift", "SwiftUI", "SwiftyMocky", "Swinject", "Protobuf"]
     },
     {
-        id: 3,
+        id: 5,
         title: "Software Developer Intern",
         company: "OurGroceries, Inc.",
         date: "Jan 2024 - Apr 2024",
         image: OurGroceriesLogo,
-        description: "Assisted in the development of e-commerce platforms. Responsible for building reusable components and fixing bugs in the existing codebase. Participated in daily stand-ups and sprint planning.",
+        description: "Led project to analyze ~1.48M customer strings and create a library for handling natural language measurement units",        
         technologies: ["C++", "Make", "GDB", "Valgrind", "Objective-C", "Bash"]
     },
     {
-        id: 4,
+        id: 6,
         title: "Software Developer Intern",
         company: "OurGroceries, Inc.",
         date: "May 2023 - Aug 2023",
         image: OurGroceriesLogo,
-        description: "Created wireframes and prototypes for mobile applications. Conducted user research and usability testing to improve product designs. Collaborated with developers to ensure design implementation fidelity.",
-        technologies: ["C++", "Objective-C", "Bash", "Python", "Java", "XMLStarlet"]
+        description: "Localized the entire iOS app; localized the screenshot generator for app-store & onboarding tour images; automated the export, import, and validation process of translations",
+        technologies: ["C++", "Objective-C", "Bash", "Python", "Java", "XMLStarlet", "Make"]
     }
 ];
 

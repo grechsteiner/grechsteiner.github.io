@@ -65,7 +65,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             },
         },
         {
-            name: 'greeting',
+            name: 'greetings',
             description: 'Display the greeting banner',
             execute: () => {
                 const banner = [

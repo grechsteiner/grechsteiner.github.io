@@ -3,13 +3,20 @@ import ProjectCard from "../components/ProjectCard";
 
 import ChessPlussImage from "../assets/images/ChessPlus.png";   
 import DataBaseballImage from "../assets/images/DataBaseball.png";
-import SampleImage from "../assets/images/sample.png";
 import PersonalWebsiteImage from "../assets/images/PersonalWebsite.png";
 import PyChessImage from "../assets/images/PyChess.png";
+import STM32Image from "../assets/images/stm32.jpg";
 import TicTacToeImage from "../assets/images/TicTacToe.png";
 
 
 const projects = [
+    {
+        title: "Real Time Operating System",
+        description: "A Real Time Operating System designed to be run on a STM32F401RE microprocessor (ARM Cortex M4) (96KB RAM, 512KB on-chip flash memory) packaged in an STM Nucleo-64 board",
+        image: STM32Image,
+        githubURL: "https://github.com/grechsteiner/RTX",
+        technologies: ["C"]   
+    },
     {
         title: "ChessPluss",
         description: "C++ OOP Chess Project",
@@ -19,24 +26,24 @@ const projects = [
     },
     {
         title: "DataBaseball",
-        description: "Web app for exploring historical baseball stats, built with Python, Node.js, MySQL, React, Make",
+        description: "Web app for exploring historical baseball stats, built with Python, MySQL, Make, JavaScript, Node.js, and React",
         image: DataBaseballImage,
         githubURL: "https://github.com/grechsteiner/DataBaseball",
-        technologies: ["Python", "MySQL", "JavaScript", "Node.js", "React", "Make"]   
+        technologies: ["Python", "MySQL", "Make", "JavaScript", "Node.js", "React"]   
     },
-    {
-        title: "Simple Operating System",
-        description: "xyz",
-        image: SampleImage,
-        githubURL: "https://github.com/username/portfolio",
-        technologies: ["C"]   
-    },
+    // {
+    //     title: "SE27 Degree Planner",
+    //     description: "xyz",
+    //     image: SampleImage,
+    //     githubURL: "https://github.com/grechsteiner/ChessPlus",
+    //     technologies: ["Python", "MySQL", "Make", "TypeScript", "JavaScript", "Node.js", "React"]  
+    // },
     {
         title: "Personal Website",
         description: "This very website!",
         image: PersonalWebsiteImage,
         githubURL: "https://github.com/grechsteiner/GRPersonalWebsite",
-        technologies: ["TypeScript", "React", "Tailwind CSS", "Vite"]   
+        technologies: ["TypeScript", "JavaScript", "React", "Tailwind CSS"]   
     },
     {
         title: "PyChess",

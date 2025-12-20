@@ -8,6 +8,8 @@ export type Internship = {
     date: string;
     image: string;
     description: string;
+    urlText?: string
+    url?: string;
     technologies: string[];
 };
 
@@ -53,10 +55,25 @@ export function WorkExperience( { internships }: WorkExperienceProps): React.JSX
                     ))}
                 </div>
 
-                <div className="w-full md:w-2/3 bg-gray-800 text-gray-300 rounded-lg shadow-sm">
-                    <div className="p-4 md:p-6">
+                <div className="w-full md:w-2/3 bg-gray-800 text-gray-300 rounded-lg max-h-64 shadow-sm">
+                    <div className="p-4 md:p-6 space-y-4">
                         <div className="mb-6">
-                            <p className="text-gray-300">{selectedInternship.description}</p>
+                            <span className="text-gray-300">
+                                {selectedInternship.description}
+                                {selectedInternship.urlText && selectedInternship.url && (
+                                    <>
+                                    {" "}
+                                    <a
+                                        href={selectedInternship.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-400 underline hover:text-blue-300"
+                                    >
+                                        {selectedInternship.urlText}
+                                    </a>
+                                    </>
+                                )}
+                                </span>
                         </div>
                         
                         <div>

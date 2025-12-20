@@ -3,8 +3,9 @@ import { FaJava, FaDatabase } from 'react-icons/fa';
 import { GrMysql } from "react-icons/gr";
 import { SiC, SiCplusplus, SiPython, SiScala, SiSwift, SiGnubash, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiGit, SiGnu, SiJenkins, SiReact, SiTailwindcss, SiVite } from 'react-icons/si';
 
-import ProtobufIcon from '../assets/icons/protobuf.svg?react';
 import ObjCIcon from '../assets/icons/objective-c.svg?react';
+import ProtobufIcon from '../assets/icons/protobuf.svg?react';
+import PytestIcon from '../assets/icons/pytest.svg?react';
 import GDBIcon from '../assets/icons/gdb.svg?react';
 import ValgrindIcon from '../assets/icons/valgrind.svg?react';
 
@@ -36,17 +37,16 @@ export default function IconGrid({ }: IconGridProps): React.JSX.Element {
       
     const technologies: IconItem[] = [
         { name: 'Git', Icon: SiGit },
-        { name: 'Protobuf', Icon: ProtobufIcon },
-        { name: 'MySQL', Icon: GrMysql },
-        { name: 'Make', Icon: SiGnu },
         { name: 'GDB', Icon: GDBIcon },
         { name: 'Valgrind', Icon: ValgrindIcon }, 
-        { name: 'Jenkins', Icon: SiJenkins },
+        { name: 'Pytest', Icon: PytestIcon }, 
+        { name: 'MySQL', Icon: GrMysql },
+        { name: 'Make', Icon: SiGnu },
+        { name: 'Protobuf', Icon: ProtobufIcon },
         { name: 'React', Icon: SiReact },
         { name: 'HTML', Icon: SiHtml5 },
         { name: 'CSS', Icon: SiCss3 },
         { name: 'Tailwind CSS', Icon: SiTailwindcss },
-        { name: 'Vite', Icon: SiVite },
     ];
     
     return (
