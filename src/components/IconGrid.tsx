@@ -3,11 +3,11 @@ import { FaJava, FaDatabase } from 'react-icons/fa';
 import { GrMysql } from "react-icons/gr";
 import { SiC, SiCplusplus, SiPython, SiScala, SiSwift, SiGnubash, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiGit, SiGnu, SiReact, SiTailwindcss } from 'react-icons/si';
 
-import ObjCIcon from '../assets/icons/objective-c.svg?react';
-import ProtobufIcon from '../assets/icons/protobuf.svg?react';
-import PytestIcon from '../assets/icons/pytest.svg?react';
-import GDBIcon from '../assets/icons/gdb.svg?react';
-import ValgrindIcon from '../assets/icons/valgrind.svg?react';
+import ObjCIcon from '../../public/icons/objective-c.svg?react';
+import ProtobufIcon from '../../public/icons/protobuf.svg?react';
+import PytestIcon from '../../public/icons/pytest.svg?react';
+import GDBIcon from '../../public/icons/gdb.svg?react';
+import ValgrindIcon from '../../public/icons/valgrind.svg?react';
 
 
 type IconItem = {

@@ -1,9 +1,9 @@
 import Layout from "../components/Layout";
 import { Internship, WorkExperience } from "../components/WorkExperience";
 
-import TenstorrentLogo from "../assets/images/tenstorrentLogo.jpeg";
-import FaireLogo from "../assets/images/faireLogo.jpeg";
-import OurGroceriesLogo from "../assets/images/ourgroceriesLogo.jpeg";
+import TenstorrentLogo from "../../public/images/tenstorrentLogo.jpeg";
+import FaireLogo from "../../public/images/faireLogo.jpeg";
+import OurGroceriesLogo from "../../public/images/ourgroceriesLogo.jpeg";
 
 
 const internships: Internship[] = [

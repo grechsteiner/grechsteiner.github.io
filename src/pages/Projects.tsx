@@ -1,12 +1,12 @@
 import Layout from "../components/Layout";
 import ProjectCard from "../components/ProjectCard";
 
-import ChessPlusImage from "../assets/images/ChessPlus.png";   
-import DataBaseballImage from "../assets/images/DataBaseball.png";
-import PersonalWebsiteImage from "../assets/images/PersonalWebsite.png";
-import PyChessImage from "../assets/images/PyChess.png";
-import STM32Image from "../assets/images/stm32.jpg";
-import TicTacToeImage from "../assets/images/TicTacToe.png";
+import ChessPlusImage from "../../public/images/ChessPlus.png";   
+import DataBaseballImage from "../../public/images/DataBaseball.png";
+import PersonalWebsiteImage from "../../public/images/PersonalWebsite.png";
+import PyChessImage from "../../public/images/PyChess.png";
+import STM32Image from "../../public/images/stm32.jpg";
+import TicTacToeImage from "../../public/images/TicTacToe.png";
 
 
 const projects = [

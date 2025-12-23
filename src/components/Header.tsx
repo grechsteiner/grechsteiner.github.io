@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import LinkedInIcon from '../assets/icons/linkedin.svg?react';
-import GitHubIcon from '../assets/icons/github.svg?react';
-import SEWebringIcon from '../assets/icons/se-webring.svg?react';
+import LinkedInIcon from '../../public/icons/linkedin.svg?react';
+import GitHubIcon from '../../public/icons/github.svg?react';
+import SEWebringIcon from '../../public/icons/se-webring.svg?react';
 
 
 type HeaderProps = {

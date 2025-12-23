@@ -1,4 +1,4 @@
-import GitHubIcon from '../assets/icons/github.svg?react';
+import GitHubIcon from '../../public/icons/github.svg?react';
 
 type ProjectCardProps = {
     title: string;
