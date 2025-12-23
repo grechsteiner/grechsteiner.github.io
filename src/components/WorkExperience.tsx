@@ -55,7 +55,7 @@ export function WorkExperience( { internships }: WorkExperienceProps): React.JSX
                     ))}
                 </div>
 
-                <div className="w-full md:w-2/3 bg-gray-800 text-gray-300 rounded-lg max-h-64 shadow-sm">
+                <div className="w-full md:w-2/3 bg-gray-800 text-gray-300 rounded-lg max-h-44 shadow-sm">
                     <div className="p-4 md:p-6 space-y-4">
                         <div className="mb-6">
                             <span className="text-gray-300">

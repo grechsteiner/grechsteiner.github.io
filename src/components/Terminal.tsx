@@ -157,14 +157,6 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
             },
         },
         {
-            name: 'email',
-            description: 'Send me an email',
-            execute: () => {
-                window.open('mailto:grayson@fullscale.org', '_blank', 'noopener,noreferrer');
-                return null;
-            },
-        },
-        {
             name: 'webring',
             description: 'Visit the SE Webring',
             execute: () => {
@@ -380,7 +372,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
                 <span ref={charMeasureRef} className="absolute font-mono text-[10pt]" style={{ visibility: 'hidden' }}>M</span>
 
                 <div className="flex items-center py-1 bg-gray-800">
-                    <div className="flex-grow text-center text-gray-300">guest@grechsteiner.com ━━ ━bash ━━ {size.charWidth}x{size.charHeight}</div>
+                    <div className="flex-grow text-center text-gray-300">guest@grechsteiner.github.io ━━ ━bash ━━ {size.charWidth}x{size.charHeight}</div>
                 </div>
 
                 <div ref={terminalRef} className="flex-grow p-2 overflow-y-auto">
@@ -389,7 +381,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
                             {line.displayType === DisplayObjectType.CommandInput 
                                 ? (
                                     <div className="flex">
-                                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                                        <span className="mr-2">[guest@grechsteiner.github.io ~]$</span>
                                         <span>{line.content}</span>
                                     </div>
                                 ) 

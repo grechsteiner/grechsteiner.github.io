@@ -46,7 +46,7 @@ const internships: Internship[] = [
         company: "Faire",
         date: "Sept 2024 - Dec 2024",
         image: FaireLogo,
-        description: "Shipped 6 iOS features as a member of the growth team; collaborated with backend devs to specify behaviour, design protobufs & endpoints, and identify potential security threats",
+        description: "Shipping iOS features as a member of the growth team",
         technologies: ["Swift", "SwiftUI", "SwiftyMocky", "Swinject", "Protobuf"]
     },
     {
@@ -55,7 +55,7 @@ const internships: Internship[] = [
         company: "OurGroceries, Inc.",
         date: "Jan 2024 - Apr 2024",
         image: OurGroceriesLogo,
-        description: "Led project to analyze ~1.48M customer strings and create a library for handling natural language measurement units",        
+        description: "Led project for extracting and processing natural language measurement units",        
         technologies: ["C++", "Make", "GDB", "Valgrind", "Objective-C", "Bash"]
     },
     {
@@ -64,7 +64,7 @@ const internships: Internship[] = [
         company: "OurGroceries, Inc.",
         date: "May 2023 - Aug 2023",
         image: OurGroceriesLogo,
-        description: "Localized the entire iOS app; localized the screenshot generator for app-store & onboarding tour images; automated the export, import, and validation process of translations",
+        description: "Localized the entire iOS app, including automation of all translation processes",
         technologies: ["C++", "Objective-C", "Bash", "Python", "Java", "XMLStarlet", "Make"]
     }
 ];

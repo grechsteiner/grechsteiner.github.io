@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import React from 'react';
 import LinkedInIcon from '../assets/icons/linkedin.svg?react';
 import GitHubIcon from '../assets/icons/github.svg?react';
-import EmailIcon from '../assets/icons/email.svg?react';
 import SEWebringIcon from '../assets/icons/se-webring.svg?react';
 
 
@@ -61,14 +60,6 @@ export default function Header({ contentWidthClass }: HeaderProps): React.JSX.El
 
                     >
                         <LinkedInIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
-                    </a>
-                    <a 
-                        href="mailto:grayson@fullscale.org"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-center mr-[8px]"
-                        aria-label="Email"
-                    >
-                        <EmailIcon className="w-[30px] h-[30px] aspect-square text-white group-hover:text-sky-400 transition-colors transform group-hover:scale-110 transition-transform" />
                     </a>
                     <a 
                         href="https://se-webring.xyz/" 

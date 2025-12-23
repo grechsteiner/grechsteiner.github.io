@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FaJava, FaDatabase } from 'react-icons/fa';
 import { GrMysql } from "react-icons/gr";
-import { SiC, SiCplusplus, SiPython, SiScala, SiSwift, SiGnubash, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiGit, SiGnu, SiJenkins, SiReact, SiTailwindcss, SiVite } from 'react-icons/si';
+import { SiC, SiCplusplus, SiPython, SiScala, SiSwift, SiGnubash, SiJavascript, SiTypescript, SiHtml5, SiCss3, SiGit, SiGnu, SiReact, SiTailwindcss } from 'react-icons/si';
 
 import ObjCIcon from '../assets/icons/objective-c.svg?react';
 import ProtobufIcon from '../assets/icons/protobuf.svg?react';

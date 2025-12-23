@@ -1,7 +1,7 @@
 import Layout from "../components/Layout";
 import ProjectCard from "../components/ProjectCard";
 
-import ChessPlussImage from "../assets/images/ChessPlus.png";   
+import ChessPlusImage from "../assets/images/ChessPlus.png";   
 import DataBaseballImage from "../assets/images/DataBaseball.png";
 import PersonalWebsiteImage from "../assets/images/PersonalWebsite.png";
 import PyChessImage from "../assets/images/PyChess.png";
@@ -18,15 +18,15 @@ const projects = [
         technologies: ["C"]   
     },
     {
-        title: "ChessPluss",
+        title: "ChessPlus",
         description: "C++ OOP Chess Project",
-        image: ChessPlussImage,
+        image: ChessPlusImage,
         githubURL: "https://github.com/grechsteiner/ChessPlus",
         technologies: ["C++", "Make", "GDB", "Valgrind"]   
     },
     {
         title: "DataBaseball",
-        description: "Web app for exploring historical baseball stats, built with Python, MySQL, Make, JavaScript, Node.js, and React",
+        description: "Web app for exploring historical baseball stats",
         image: DataBaseballImage,
         githubURL: "https://github.com/grechsteiner/DataBaseball",
         technologies: ["Python", "MySQL", "Make", "JavaScript", "Node.js", "React"]   
