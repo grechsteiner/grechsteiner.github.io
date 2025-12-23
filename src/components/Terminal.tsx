@@ -392,7 +392,7 @@ export default function Terminal({ }: TerminalProps): React.JSX.Element {
                     ))}
 
                     <div className="flex items-center">
-                        <span className="mr-2">[guest@grechsteiner.com ~]$</span>
+                        <span className="mr-2">[guest@grechsteiner.github.io ~]$</span>
                         <input
                             ref={inputRef}
                             type="text"
