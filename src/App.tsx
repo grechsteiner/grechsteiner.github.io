@@ -8,7 +8,7 @@ import './App.css'
 
 export default function App() {
   return (
-    <Router basename="/grechsteiner.github.io/">
+    <Router basename="/">
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
