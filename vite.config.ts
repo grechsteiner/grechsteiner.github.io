@@ -12,5 +12,5 @@ export default defineConfig({
         }),
         react()
     ],
-    base: '/'
+    base: '/grechsteiner.github.io/'
 })
