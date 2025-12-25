@@ -11,10 +11,10 @@ import TicTacToeImage from "../../public/images/TicTacToe.png";
 
 const projects = [
     {
-        title: "Real Time Operating System",
+        title: "RTOS",
         description: "A Real Time Operating System designed to be run on a STM32F401RE microprocessor (ARM Cortex M4) (96KB RAM, 512KB on-chip flash memory) packaged in an STM Nucleo-64 board",
         image: STM32Image,
-        githubURL: "https://github.com/grechsteiner/RTX",
+        githubURL: "https://github.com/grechsteiner/RTOS",
         technologies: ["C"]   
     },
     {
@@ -35,14 +35,14 @@ const projects = [
     //     title: "SE27 Degree Planner",
     //     description: "xyz",
     //     image: SampleImage,
-    //     githubURL: "https://github.com/grechsteiner/ChessPlus",
+    //     githubURL: "tbd",
     //     technologies: ["Python", "MySQL", "Make", "TypeScript", "JavaScript", "Node.js", "React"]  
     // },
     {
         title: "Personal Website",
         description: "This very website!",
         image: PersonalWebsiteImage,
-        githubURL: "https://github.com/grechsteiner/GRPersonalWebsite",
+        githubURL: "https://github.com/grechsteiner/grechsteiner.github.io",
         technologies: ["TypeScript", "JavaScript", "React", "Tailwind CSS"]   
     },
     {
@@ -56,7 +56,7 @@ const projects = [
         title: "Tic-Tac-Toe",
         description:"Python Tic-Tac-Toe Game With AI Opponent and Voice Input",
         image: TicTacToeImage,
-        githubURL: "https://github.com/username/portfolio",
+        githubURL: "https://github.com/grechsteiner/Tic-Tac-Toe",
         technologies: ["Python", "PyGame"]   
     }
 ]
